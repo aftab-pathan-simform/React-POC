@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Box,
   Typography,
@@ -15,15 +14,20 @@ import {
   TextField,
   IconButton,
   Chip,
-} from '@mui/material';
+} from "@mui/material";
 import {
   Add,
   Edit,
   Delete,
   Category as CategoryIcon,
-} from '@mui/icons-material';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { addCategory, updateCategory, deleteCategory, Category } from '../../store/slices/categorySlice';
+} from "@mui/icons-material";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import {
+  addCategory,
+  updateCategory,
+  deleteCategory,
+  Category,
+} from "../../store/slices/categorySlice";
 
 const CategoryManagement: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -33,8 +37,8 @@ const CategoryManagement: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [editingCategory, setEditingCategory] = useState<Category | null>(null);
   const [formData, setFormData] = useState({
-    name: '',
-    description: '',
+    name: "",
+    description: "",
   });
 
   const handleOpen = (category?: Category) => {
@@ -42,13 +46,13 @@ const CategoryManagement: React.FC = () => {
       setEditingCategory(category);
       setFormData({
         name: category.name,
-        description: category.description || '',
+        description: category.description || "",
       });
     } else {
       setEditingCategory(null);
       setFormData({
-        name: '',
-        description: '',
+        name: "",
+        description: "",
       });
     }
     setOpen(true);
@@ -58,47 +62,60 @@ const CategoryManagement: React.FC = () => {
     setOpen(false);
     setEditingCategory(null);
     setFormData({
-      name: '',
-      description: '',
+      name: "",
+      description: "",
     });
   };
 
   const handleSubmit = () => {
     if (editingCategory) {
-      dispatch(updateCategory({
-        ...editingCategory,
-        name: formData.name,
-        description: formData.description,
-      }));
+      dispatch(
+        updateCategory({
+          ...editingCategory,
+          name: formData.name,
+          description: formData.description,
+        })
+      );
     } else {
-      dispatch(addCategory({
-        name: formData.name,
-        description: formData.description,
-      }));
+      dispatch(
+        addCategory({
+          name: formData.name,
+          description: formData.description,
+        })
+      );
     }
     handleClose();
   };
 
   const handleDelete = (id: string) => {
-    const itemsInCategory = items.filter(item => item.categoryId === id);
+    const itemsInCategory = items.filter((item) => item.categoryId === id);
     if (itemsInCategory.length > 0) {
-      alert(`Cannot delete category. It contains ${itemsInCategory.length} menu items.`);
+      alert(
+        `Cannot delete category. It contains ${itemsInCategory.length} menu items.`
+      );
       return;
     }
-    
-    if (window.confirm('Are you sure you want to delete this category?')) {
+
+    if (window.confirm("Are you sure you want to delete this category?")) {
       dispatch(deleteCategory(id));
     }
   };
 
   const getItemCount = (categoryId: string) => {
-    return items.filter(item => item.categoryId === categoryId).length;
+    return items.filter((item) => item.categoryId === categoryId).length;
   };
 
   return (
     <Box sx={{ flexGrow: 1, p: 3 }}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
-        <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          mb: 4,
+        }}
+      >
+        <Typography variant="h4" sx={{ fontWeight: "bold" }}>
           Category Management
         </Typography>
         <Button
@@ -114,19 +131,25 @@ const CategoryManagement: React.FC = () => {
       <Grid container spacing={3}>
         {categories.map((category) => (
           <Grid size={{ xs: 12, sm: 6, md: 4 }} key={category.id}>
-            <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+            <Card
+              sx={{ height: "100%", display: "flex", flexDirection: "column" }}
+            >
               <CardContent sx={{ flexGrow: 1 }}>
-                <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                  <CategoryIcon sx={{ mr: 1, color: 'primary.main' }} />
-                  <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+                <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
+                  <CategoryIcon sx={{ mr: 1, color: "primary.main" }} />
+                  <Typography variant="h6" sx={{ fontWeight: "bold" }}>
                     {category.name}
                   </Typography>
                 </Box>
-                
-                <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-                  {category.description || 'No description provided'}
+
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  sx={{ mb: 2 }}
+                >
+                  {category.description || "No description provided"}
                 </Typography>
-                
+
                 <Chip
                   label={`${getItemCount(category.id)} items`}
                   size="small"
@@ -134,8 +157,8 @@ const CategoryManagement: React.FC = () => {
                   variant="outlined"
                 />
               </CardContent>
-              
-              <CardActions sx={{ justifyContent: 'flex-end', p: 2 }}>
+
+              <CardActions sx={{ justifyContent: "flex-end", p: 2 }}>
                 <IconButton
                   size="small"
                   onClick={() => handleOpen(category)}
@@ -160,7 +183,7 @@ const CategoryManagement: React.FC = () => {
       {/* Add/Edit Dialog */}
       <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
         <DialogTitle>
-          {editingCategory ? 'Edit Category' : 'Add New Category'}
+          {editingCategory ? "Edit Category" : "Add New Category"}
         </DialogTitle>
         <DialogContent>
           <TextField
@@ -181,7 +204,9 @@ const CategoryManagement: React.FC = () => {
             rows={3}
             variant="outlined"
             value={formData.description}
-            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, description: e.target.value })
+            }
           />
         </DialogContent>
         <DialogActions>
@@ -191,7 +216,7 @@ const CategoryManagement: React.FC = () => {
             variant="contained"
             disabled={!formData.name.trim()}
           >
-            {editingCategory ? 'Update' : 'Add'}
+            {editingCategory ? "Update" : "Add"}
           </Button>
         </DialogActions>
       </Dialog>

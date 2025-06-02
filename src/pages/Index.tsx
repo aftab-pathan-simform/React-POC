@@ -1,8 +1,7 @@
-
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { RootState } from '../store/store';
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
 
 const Index: React.FC = () => {
   const navigate = useNavigate();
@@ -11,7 +10,7 @@ const Index: React.FC = () => {
   useEffect(() => {
     // Redirect to dashboard if authenticated, otherwise show login
     if (isAuthenticated) {
-      navigate('/');
+      navigate("/");
     }
   }, [isAuthenticated, navigate]);
 

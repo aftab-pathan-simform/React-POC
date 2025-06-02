@@ -1,73 +1,94 @@
-# Welcome to your Lovable project
+# 📖 Restaurant Admin Panel - Menu Management System
 
-## Project info
+A responsive, easy-to-use **Admin Panel** for managing a restaurant's menu, built with **React**, **TypeScript**, **Redux Toolkit**, and **Material UI (MUI)**. This panel allows restaurant admins to manage menu items, categories, and monitor key metrics—all stored using `localStorage`.
 
-**URL**: https://lovable.dev/projects/1f2200eb-4b37-4a71-ba7e-e4cf10a1bd77
+## 🚀 Features
 
-## How can I edit this code?
+### 🔒 User Authentication
 
-There are several ways of editing your application.
+- Secure login system to ensure only authorized personnel can access the panel.
 
-**Use Lovable**
+### 📋 Menu Management
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/1f2200eb-4b37-4a71-ba7e-e4cf10a1bd77) and start prompting.
+- **View Menu Items:** See all menu items in a card/grid layout with categories, descriptions, and prices.
+- **Add New Items:** Add new dishes with images, description, ingredients, categories, and price.
+- **Edit Existing Items:** Easily modify item details.
+- **Delete Items:** Remove outdated or unavailable dishes.
+- **Set Availability:** Mark items as available/unavailable.
+- **Categorization:** Organize dishes into categories like Appetizers, Main Courses, Desserts, and Beverages.
+- **Image Uploads:** Enhance menu presentation with image uploads.
 
-Changes made via Lovable will be committed automatically to this repo.
+### 📊 Dashboard Overview
 
-**Use your preferred IDE**
+- **Total Menu Items:** Displays the total number of items in the menu.
+- **Available Items:** Shows how many items are currently available.
+- **Categories Count:** Number of categories created.
+- **Average Price:** Calculates the average price of menu items.
+- **Recent Menu Items:** Quick access to recently added or modified items.
+- **Categories Overview:** Displays categories and the count of items in each.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### 🔍 Search and Filters
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- Search bar for locating specific menu items.
+- Category filters for streamlined viewing.
+- Toggle to show/hide unavailable items.
 
-Follow these steps:
+### 📱 Responsive Design
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+- Built with **MUI**, ensuring usability across desktops, tablets, and mobile devices.
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### 💾 Local Storage
 
-# Step 3: Install the necessary dependencies.
-npm i
+- Data persistence through `localStorage`, so your menu and categories remain intact across sessions without backend integration.
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+### 🎨 Design
 
-**Edit a file directly in GitHub**
+- Fully styled with **Material UI**, using MUI’s components and icons for a clean, professional look.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 🛠️ Tech Stack
 
-**Use GitHub Codespaces**
+- **Frontend:** React + TypeScript
+- **State Management:** Redux Toolkit
+- **Design/UI:** Material UI (MUI)
+- **Data Persistence:** `localStorage`
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 🔑 How to Run Locally
 
-## What technologies are used for this project?
+1. Clone the repository:
 
-This project is built with:
+   ```bash
+   git clone https://github.com/aftab-pathan-simform/React-POC
+   cd your-repo-folder
+   ```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+2. Install dependencies:
 
-## How can I deploy this project?
+   ```bash
+   npm install
+   ```
 
-Simply open [Lovable](https://lovable.dev/projects/1f2200eb-4b37-4a71-ba7e-e4cf10a1bd77) and click on Share -> Publish.
+3. Start the development server:
 
-## Can I connect a custom domain to my Lovable project?
+   ```bash
+   npm start
+   ```
 
-Yes, you can!
+4. Open `http://localhost:8080` in your browser.
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## 📝 Notes
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+- **Authentication is mocked.** You can enhance it by integrating real auth services (Firebase/Auth0).
+- **LocalStorage is used.** For production, replace with a proper backend/API.
+- **MUI Icons and Design are strictly used.** No other UI libraries included.
+
+## 📸 Screenshots
+
+Here are some key UI views:
+
+- **Dashboard Overview:** Displays stats, recent menu items, and category overview.
+- **Menu Items:** Card-based layout showing items with edit/delete options.
+- **Categories:** List of categories with edit/delete options.
+
+![Dashboard Screenshot](./public/assets/FoodAppDashboard.png)
+![Menu Items Screenshot](./public/assets/foodAppMenu.png)
+![Categories Screenshot](./public/assets/FoodAppCategories.png)

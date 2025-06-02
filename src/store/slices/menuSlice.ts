@@ -1,5 +1,4 @@
-
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface MenuItem {
   id: string;
@@ -22,34 +21,39 @@ interface MenuState {
 
 const initialItems: MenuItem[] = [
   {
-    id: '1',
-    name: 'Caesar Salad',
-    description: 'Fresh romaine lettuce with parmesan cheese and croutons',
+    id: "1",
+    name: "Caesar Salad",
+    description: "Fresh romaine lettuce with parmesan cheese and croutons",
     price: 12.99,
-    categoryId: '1',
-    ingredients: ['romaine lettuce', 'parmesan cheese', 'croutons', 'caesar dressing'],
+    categoryId: "1",
+    ingredients: [
+      "romaine lettuce",
+      "parmesan cheese",
+      "croutons",
+      "caesar dressing",
+    ],
     available: true,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   },
   {
-    id: '2',
-    name: 'Grilled Salmon',
-    description: 'Fresh Atlantic salmon grilled to perfection with herbs',
+    id: "2",
+    name: "Grilled Salmon",
+    description: "Fresh Atlantic salmon grilled to perfection with herbs",
     price: 24.99,
-    categoryId: '2',
-    ingredients: ['salmon', 'herbs', 'lemon', 'olive oil'],
+    categoryId: "2",
+    ingredients: ["salmon", "herbs", "lemon", "olive oil"],
     available: true,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   },
   {
-    id: '3',
-    name: 'Chocolate Cake',
-    description: 'Rich chocolate cake with chocolate ganache',
+    id: "3",
+    name: "Chocolate Cake",
+    description: "Rich chocolate cake with chocolate ganache",
     price: 8.99,
-    categoryId: '3',
-    ingredients: ['chocolate', 'flour', 'eggs', 'butter', 'sugar'],
+    categoryId: "3",
+    ingredients: ["chocolate", "flour", "eggs", "butter", "sugar"],
     available: true,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
@@ -57,16 +61,21 @@ const initialItems: MenuItem[] = [
 ];
 
 const initialState: MenuState = {
-  items: JSON.parse(localStorage.getItem('menuItems') || JSON.stringify(initialItems)),
-  searchTerm: '',
-  selectedCategory: '',
+  items: JSON.parse(
+    localStorage.getItem("menuItems") || JSON.stringify(initialItems)
+  ),
+  searchTerm: "",
+  selectedCategory: "",
 };
 
 const menuSlice = createSlice({
-  name: 'menu',
+  name: "menu",
   initialState,
   reducers: {
-    addMenuItem: (state, action: PayloadAction<Omit<MenuItem, 'id' | 'createdAt' | 'updatedAt'>>) => {
+    addMenuItem: (
+      state,
+      action: PayloadAction<Omit<MenuItem, "id" | "createdAt" | "updatedAt">>
+    ) => {
       const newItem: MenuItem = {
         ...action.payload,
         id: Date.now().toString(),
@@ -74,21 +83,23 @@ const menuSlice = createSlice({
         updatedAt: new Date().toISOString(),
       };
       state.items.push(newItem);
-      localStorage.setItem('menuItems', JSON.stringify(state.items));
+      localStorage.setItem("menuItems", JSON.stringify(state.items));
     },
     updateMenuItem: (state, action: PayloadAction<MenuItem>) => {
-      const index = state.items.findIndex(item => item.id === action.payload.id);
+      const index = state.items.findIndex(
+        (item) => item.id === action.payload.id
+      );
       if (index !== -1) {
         state.items[index] = {
           ...action.payload,
           updatedAt: new Date().toISOString(),
         };
-        localStorage.setItem('menuItems', JSON.stringify(state.items));
+        localStorage.setItem("menuItems", JSON.stringify(state.items));
       }
     },
     deleteMenuItem: (state, action: PayloadAction<string>) => {
-      state.items = state.items.filter(item => item.id !== action.payload);
-      localStorage.setItem('menuItems', JSON.stringify(state.items));
+      state.items = state.items.filter((item) => item.id !== action.payload);
+      localStorage.setItem("menuItems", JSON.stringify(state.items));
     },
     setSearchTerm: (state, action: PayloadAction<string>) => {
       state.searchTerm = action.payload;
@@ -97,11 +108,11 @@ const menuSlice = createSlice({
       state.selectedCategory = action.payload;
     },
     toggleAvailability: (state, action: PayloadAction<string>) => {
-      const item = state.items.find(item => item.id === action.payload);
+      const item = state.items.find((item) => item.id === action.payload);
       if (item) {
         item.available = !item.available;
         item.updatedAt = new Date().toISOString();
-        localStorage.setItem('menuItems', JSON.stringify(state.items));
+        localStorage.setItem("menuItems", JSON.stringify(state.items));
       }
     },
   },

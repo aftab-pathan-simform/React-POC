@@ -1,7 +1,6 @@
-
-import React from 'react';
-import AdminLayout from '../components/Layout/AdminLayout';
-import Dashboard from '../components/Dashboard/Dashboard';
+import React from "react";
+import AdminLayout from "../components/Layout/AdminLayout";
+import Dashboard from "../components/Dashboard/Dashboard";
 
 const DashboardPage: React.FC = () => {
   return (

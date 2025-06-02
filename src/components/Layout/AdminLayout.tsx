@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   AppBar,
   Box,
@@ -19,7 +18,7 @@ import {
   Divider,
   useTheme,
   useMediaQuery,
-} from '@mui/material';
+} from "@mui/material";
 import {
   Menu as MenuIcon,
   Dashboard,
@@ -27,11 +26,11 @@ import {
   Category,
   AccountCircle,
   Logout,
-} from '@mui/icons-material';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../store/store';
-import { logout } from '../../store/slices/authSlice';
-import { useNavigate, useLocation } from 'react-router-dom';
+} from "@mui/icons-material";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../store/store";
+import { logout } from "../../store/slices/authSlice";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -46,8 +45,8 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
   const { user } = useSelector((state: RootState) => state.auth);
 
   const handleDrawerToggle = () => {
@@ -64,20 +63,23 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
 
   const handleLogout = () => {
     dispatch(logout());
-    navigate('/login');
+    navigate("/login");
     handleProfileMenuClose();
   };
 
   const menuItems = [
-    { text: 'Dashboard', icon: <Dashboard />, path: '/' },
-    { text: 'Menu Items', icon: <Restaurant />, path: '/menu' },
-    { text: 'Categories', icon: <Category />, path: '/categories' },
+    { text: "Dashboard", icon: <Dashboard />, path: "/" },
+    { text: "Menu Items", icon: <Restaurant />, path: "/menu" },
+    { text: "Categories", icon: <Category />, path: "/categories" },
   ];
 
   const drawer = (
     <div>
       <Toolbar>
-        <Typography variant="h6" sx={{ fontWeight: 'bold', color: 'primary.main' }}>
+        <Typography
+          variant="h6"
+          sx={{ fontWeight: "bold", color: "primary.main" }}
+        >
           Restaurant Admin
         </Typography>
       </Toolbar>
@@ -92,15 +94,22 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
                 if (isMobile) setMobileOpen(false);
               }}
               sx={{
-                '&.Mui-selected': {
-                  backgroundColor: 'primary.light',
-                  '&:hover': {
-                    backgroundColor: 'primary.light',
+                "&.Mui-selected": {
+                  backgroundColor: "primary.light",
+                  "&:hover": {
+                    backgroundColor: "primary.light",
                   },
                 },
               }}
             >
-              <ListItemIcon sx={{ color: location.pathname === item.path ? 'primary.main' : 'inherit' }}>
+              <ListItemIcon
+                sx={{
+                  color:
+                    location.pathname === item.path
+                      ? "primary.main"
+                      : "inherit",
+                }}
+              >
                 {item.icon}
               </ListItemIcon>
               <ListItemText primary={item.text} />
@@ -112,7 +121,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
   );
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -127,7 +136,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { md: 'none' } }}
+            sx={{ mr: 2, display: { md: "none" } }}
           >
             <MenuIcon />
           </IconButton>
@@ -151,13 +160,13 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
             id="profile-menu"
             anchorEl={anchorEl}
             anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'right',
+              vertical: "bottom",
+              horizontal: "right",
             }}
             keepMounted
             transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
+              vertical: "top",
+              horizontal: "right",
             }}
             open={Boolean(anchorEl)}
             onClose={handleProfileMenuClose}
@@ -190,8 +199,11 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
             keepMounted: true,
           }}
           sx={{
-            display: { xs: 'block', md: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            display: { xs: "block", md: "none" },
+            "& .MuiDrawer-paper": {
+              boxSizing: "border-box",
+              width: drawerWidth,
+            },
           }}
         >
           {drawer}
@@ -199,8 +211,11 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
         <Drawer
           variant="permanent"
           sx={{
-            display: { xs: 'none', md: 'block' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            display: { xs: "none", md: "block" },
+            "& .MuiDrawer-paper": {
+              boxSizing: "border-box",
+              width: drawerWidth,
+            },
           }}
           open
         >

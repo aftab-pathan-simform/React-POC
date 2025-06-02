@@ -1,5 +1,4 @@
-
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo } from "react";
 import {
   Box,
   Typography,
@@ -24,7 +23,7 @@ import {
   InputAdornment,
   Switch,
   FormControlLabel,
-} from '@mui/material';
+} from "@mui/material";
 import {
   Add,
   Search,
@@ -33,23 +32,25 @@ import {
   Visibility,
   VisibilityOff,
   Restaurant,
-} from '@mui/icons-material';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../store/store';
+} from "@mui/icons-material";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../store/store";
 import {
   deleteMenuItem,
   toggleAvailability,
   setSearchTerm,
   setSelectedCategory,
-} from '../../store/slices/menuSlice';
-import MenuItemForm from './MenuItemForm';
-import { MenuItem as MenuItemType } from '../../store/slices/menuSlice';
+} from "../../store/slices/menuSlice";
+import MenuItemForm from "./MenuItemForm";
+import { MenuItem as MenuItemType } from "../../store/slices/menuSlice";
 
 const MenuManagement: React.FC = () => {
   const dispatch = useDispatch();
-  const { items, searchTerm, selectedCategory } = useSelector((state: RootState) => state.menu);
+  const { items, searchTerm, selectedCategory } = useSelector(
+    (state: RootState) => state.menu
+  );
   const { categories } = useSelector((state: RootState) => state.categories);
-  
+
   const [formOpen, setFormOpen] = useState(false);
   const [editItem, setEditItem] = useState<MenuItemType | null>(null);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
@@ -57,14 +58,18 @@ const MenuManagement: React.FC = () => {
   const [showUnavailable, setShowUnavailable] = useState(true);
 
   const filteredItems = useMemo(() => {
-    return items.filter(item => {
-      const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          item.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          item.ingredients.some(ing => ing.toLowerCase().includes(searchTerm.toLowerCase()));
-      
-      const matchesCategory = selectedCategory === '' || item.categoryId === selectedCategory;
+    return items.filter((item) => {
+      const matchesSearch =
+        item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.ingredients.some((ing) =>
+          ing.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+
+      const matchesCategory =
+        selectedCategory === "" || item.categoryId === selectedCategory;
       const matchesAvailability = showUnavailable || item.available;
-      
+
       return matchesSearch && matchesCategory && matchesAvailability;
     });
   }, [items, searchTerm, selectedCategory, showUnavailable]);
@@ -97,14 +102,19 @@ const MenuManagement: React.FC = () => {
   };
 
   const getCategoryName = (categoryId: string) => {
-    const category = categories.find(cat => cat.id === categoryId);
-    return category ? category.name : 'Unknown Category';
+    const category = categories.find((cat) => cat.id === categoryId);
+    return category ? category.name : "Unknown Category";
   };
 
   return (
     <Box>
-      <Box display="flex" justifyContent="space-between" alignItems="center" mb={4}>
-        <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
+      <Box
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        mb={4}
+      >
+        <Typography variant="h4" sx={{ fontWeight: "bold" }}>
           Menu Management
         </Typography>
         <Button
@@ -174,34 +184,53 @@ const MenuManagement: React.FC = () => {
         <Grid container spacing={3}>
           {filteredItems.map((item) => (
             <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={item.id}>
-              <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+              <Card
+                sx={{
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
                 {item.image ? (
                   <CardMedia
                     component="img"
                     height="200"
                     image={item.image}
                     alt={item.name}
-                    sx={{ objectFit: 'cover' }}
+                    sx={{ objectFit: "cover" }}
                   />
                 ) : (
                   <Box
                     sx={{
                       height: 200,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      backgroundColor: 'grey.100',
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      backgroundColor: "grey.100",
                     }}
                   >
-                    <Restaurant sx={{ fontSize: 60, color: 'grey.400' }} />
+                    <Restaurant sx={{ fontSize: 60, color: "grey.400" }} />
                   </Box>
                 )}
                 <CardContent sx={{ flexGrow: 1 }}>
-                  <Box display="flex" justifyContent="space-between" alignItems="start" mb={1}>
-                    <Typography variant="h6" component="h2" sx={{ fontWeight: 'bold' }}>
+                  <Box
+                    display="flex"
+                    justifyContent="space-between"
+                    alignItems="start"
+                    mb={1}
+                  >
+                    <Typography
+                      variant="h6"
+                      component="h2"
+                      sx={{ fontWeight: "bold" }}
+                    >
                       {item.name}
                     </Typography>
-                    <Typography variant="h6" color="primary" sx={{ fontWeight: 'bold' }}>
+                    <Typography
+                      variant="h6"
+                      color="primary"
+                      sx={{ fontWeight: "bold" }}
+                    >
                       ${item.price.toFixed(2)}
                     </Typography>
                   </Box>
@@ -234,16 +263,20 @@ const MenuManagement: React.FC = () => {
                     )}
                   </Box>
                   <Chip
-                    label={item.available ? 'Available' : 'Unavailable'}
-                    color={item.available ? 'success' : 'error'}
+                    label={item.available ? "Available" : "Unavailable"}
+                    color={item.available ? "success" : "error"}
                     size="small"
                   />
                 </CardContent>
                 <CardActions>
                   <IconButton
                     onClick={() => handleToggleAvailability(item.id)}
-                    color={item.available ? 'warning' : 'success'}
-                    title={item.available ? 'Mark as unavailable' : 'Mark as available'}
+                    color={item.available ? "warning" : "success"}
+                    title={
+                      item.available
+                        ? "Mark as unavailable"
+                        : "Mark as available"
+                    }
                   >
                     {item.available ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
@@ -268,10 +301,9 @@ const MenuManagement: React.FC = () => {
         </Grid>
       ) : (
         <Alert severity="info" sx={{ mt: 4 }}>
-          {items.length === 0 
-            ? 'No menu items found. Start by adding your first menu item!'
-            : 'No items match your current filters.'
-          }
+          {items.length === 0
+            ? "No menu items found. Start by adding your first menu item!"
+            : "No items match your current filters."}
         </Alert>
       )}
 
@@ -283,14 +315,22 @@ const MenuManagement: React.FC = () => {
       />
 
       {/* Delete Confirmation Dialog */}
-      <Dialog open={deleteDialogOpen} onClose={() => setDeleteDialogOpen(false)}>
+      <Dialog
+        open={deleteDialogOpen}
+        onClose={() => setDeleteDialogOpen(false)}
+      >
         <DialogTitle>Confirm Delete</DialogTitle>
         <DialogContent>
-          Are you sure you want to delete "{itemToDelete?.name}"? This action cannot be undone.
+          Are you sure you want to delete "{itemToDelete?.name}"? This action
+          cannot be undone.
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setDeleteDialogOpen(false)}>Cancel</Button>
-          <Button onClick={handleDeleteConfirm} color="error" variant="contained">
+          <Button
+            onClick={handleDeleteConfirm}
+            color="error"
+            variant="contained"
+          >
             Delete
           </Button>
         </DialogActions>

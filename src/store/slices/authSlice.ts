@@ -1,5 +1,4 @@
-
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface AuthState {
   isAuthenticated: boolean;
@@ -11,32 +10,40 @@ interface AuthState {
 }
 
 const initialState: AuthState = {
-  isAuthenticated: JSON.parse(localStorage.getItem('isAuthenticated') || 'false'),
-  user: JSON.parse(localStorage.getItem('user') || 'null'),
+  isAuthenticated: JSON.parse(
+    localStorage.getItem("isAuthenticated") || "false"
+  ),
+  user: JSON.parse(localStorage.getItem("user") || "null"),
 };
 
 const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState,
   reducers: {
-    login: (state, action: PayloadAction<{ email: string; password: string }>) => {
+    login: (
+      state,
+      action: PayloadAction<{ email: string; password: string }>
+    ) => {
       // Simple authentication - in real app, this would validate against backend
-      if (action.payload.email === 'admin@restaurant.com' && action.payload.password === 'admin123') {
+      if (
+        action.payload.email === "admin@restaurant.com" &&
+        action.payload.password === "admin123"
+      ) {
         state.isAuthenticated = true;
         state.user = {
-          id: '1',
+          id: "1",
           email: action.payload.email,
-          name: 'Restaurant Admin',
+          name: "Restaurant Admin",
         };
-        localStorage.setItem('isAuthenticated', 'true');
-        localStorage.setItem('user', JSON.stringify(state.user));
+        localStorage.setItem("isAuthenticated", "true");
+        localStorage.setItem("user", JSON.stringify(state.user));
       }
     },
     logout: (state) => {
       state.isAuthenticated = false;
       state.user = null;
-      localStorage.removeItem('isAuthenticated');
-      localStorage.removeItem('user');
+      localStorage.removeItem("isAuthenticated");
+      localStorage.removeItem("user");
     },
   },
 });
